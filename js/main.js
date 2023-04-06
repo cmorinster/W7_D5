@@ -30,24 +30,64 @@ function buildCityCard(cityObj){
     let card = document.getElementsByClassName('card')[0];
     let old_elements = document.getElementsByClassName('card-text');
     let body = document.body;
-    let conditionC = cityObj.location.name
+    let conditionC = cityObj.current.condition.text
+    let tempF = cityObj.current.temp_f
     console.log(old_elements)
     if (old_elements.length > 0){
       let cardBody2 = document.getElementsByClassName('card-body'); 
-      
+      let cardImg2 = document.getElementsByClassName('img-panda');
       old_elements[0].remove()
       old_elements[0].remove()
       old_elements[0].remove()
       old_elements[0].remove()
       cardBody2[0].remove()
+      cardImg2[0].remove()
     }
-
-    if (conditionC.indexOf("rain")> 0){
+    let imgRow = document.getElementById('image-area');
+    console.log(conditionC);
+    if (conditionC.toLowerCase().includes("rain")){
         body.style.backgroundColor = 'rgb(133, 133, 159)';
+        let image = document.createElement('img');
+        image.className = 'img-panda';
+        image.src = 'Images/rain.png';
+        // // Add the image to card
+        imgRow.append(image);
+
+
+    } else if (conditionC.toLowerCase().includes("snow")){
+        body.style.backgroundColor = 'rgb(133, 133, 159)';
+        let image = document.createElement('img');
+        image.className = 'img-panda';
+        image.src = 'Images/snow.png';
+        // // Add the image to card
+        imgRow.append(image);
+    } else if (tempF > 85){
+        body.style.backgroundColor = 'rgb(95, 245, 250)';
+        let image = document.createElement('img');
+        image.className = 'img-panda';
+        image.src = 'Images/hot.png';
+        // // Add the image to card
+        imgRow.append(image);
+
+    } else if (tempF > 50) {
+        body.style.backgroundColor = 'rgb(95, 245, 250)';
+        let image = document.createElement('img');
+        image.className = 'img-panda';
+        image.src = 'Images/cool.png';
+        // // Add the image to card
+        imgRow.append(image);
 
     } else {
+    
         body.style.backgroundColor = 'rgb(95, 245, 250)';
+        let image = document.createElement('img');
+        image.className = 'img-panda';
+        image.src = 'Images/cold.png';
+        // // Add the image to card
+        imgRow.append(image);
+
     }
+
 
     let cardBody = document.createElement('div');
     cardBody.className = 'card-body';
@@ -58,7 +98,7 @@ function buildCityCard(cityObj){
     cityHTML.className = 'card-text city';
 
     let currentCondition = document.createElement('p');
-    currentCondition.innerHTML = `CC: ${cityObj.current.condition.text}`;
+    currentCondition.innerHTML = `Current Condition: ${cityObj.current.condition.text}`;
     currentCondition.className = 'card-text currentc';
 
     let currentTemp = document.createElement('p');
